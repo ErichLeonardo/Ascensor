@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.view.View;
 
 public class MiEdificio extends View {
@@ -14,10 +15,16 @@ public class MiEdificio extends View {
         init();
     }
 
+    public MiEdificio(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
     private void init() {
         paint = new Paint();
-        paint.setColor(Color.GRAY);
-        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.BLACK); // Color del contorno del edificio y las divisiones de los pisos
+        paint.setStyle(Paint.Style.STROKE); // Estilo de trazo para dibujar solo el contorno
+        paint.setStrokeWidth(5); // Ancho del contorno
     }
 
     @Override
@@ -27,13 +34,12 @@ public class MiEdificio extends View {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
 
-        // Dibuja el edificio
+        // Dibuja el contorno del edificio
         canvas.drawRect(50, 50, width - 50, height - 50, paint);
 
         // Dibuja las divisiones de los pisos
         int numPisos = 4;
         int pisoHeight = (height - 100) / numPisos;
-        paint.setColor(Color.BLACK);
         for (int i = 1; i < numPisos; i++) {
             int y = 50 + i * pisoHeight;
             canvas.drawLine(50, y, width - 50, y, paint);
