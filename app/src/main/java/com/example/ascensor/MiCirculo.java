@@ -10,13 +10,16 @@ import android.view.View;
 
 public class MiCirculo extends View {
     private Paint paint;
-    private float centerX, centerY; // Centro del círculo
-    private float radius; // Radio del círculo
-    private boolean isDragging = false; // Indica si el círculo está siendo arrastrado
-    private float lastY; // Última posición Y del toque
+    private float centerX, centerY;
+    private float radius;
+    private boolean isDragging = false;
+    private float lastY;
+    private float currentHeight;
+    private MainActivity activity;
 
     public MiCirculo(Context context, AttributeSet attrs) {
         super(context, attrs);
+        activity = (MainActivity) context;
         init();
     }
 
@@ -43,9 +46,10 @@ public class MiCirculo extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float touchY = event.getY();
+        currentHeight = centerY + touchY;
+        activity.updateCircleHeight(currentHeight);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                // Verificar si se ha tocado dentro del círculo
                 float distance = (float) Math.sqrt(Math.pow(centerX - event.getX(), 2) + Math.pow(centerY - touchY, 2));
                 if (distance < radius) {
                     isDragging = true;
@@ -57,7 +61,7 @@ public class MiCirculo extends View {
                     float deltaY = touchY - lastY;
                     centerY += deltaY;
                     lastY = touchY;
-                    invalidate(); // Redibujar el círculo en su nueva posición
+                    invalidate();
                 }
                 break;
             case MotionEvent.ACTION_UP:
