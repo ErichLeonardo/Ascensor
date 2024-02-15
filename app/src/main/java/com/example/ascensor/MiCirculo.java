@@ -29,6 +29,11 @@ public class MiCirculo extends View {
         paint.setStyle(Paint.Style.FILL);
     }
 
+    public float getRadius() {
+        return radius;
+    }
+
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);

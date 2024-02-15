@@ -25,14 +25,14 @@
 
     <com.example.ascensor.MiCirculo
         android:id="@+id/miCirculo"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
+        android:layout_width="82dp"
+        android:layout_height="606dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintHorizontal_bias="0.826"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
+        app:layout_constraintVertical_bias="0.139"
         tools:ignore="MissingConstraints" />
 
     <TextView
