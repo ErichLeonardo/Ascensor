@@ -9,12 +9,8 @@ import android.view.View;
 
 public class MiEdificio extends View {
     private Paint paint;
-    private Paint grayPaint;
-    private int width, height;
-    private int numPisos = 4; // Cambiado a 4 pisos
-    private int pisoHeight;
-
-    private float currentHeight; // Altura actual del círculo
+    private int numPisos = 4; // Número de pisos en el edificio
+    private float currentHeight = 0; // Altura actual del círculo
 
     public MiEdificio(Context context) {
         super(context);
@@ -28,45 +24,32 @@ public class MiEdificio extends View {
 
     private void init() {
         paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(5);
-
-        grayPaint = new Paint();
-        grayPaint.setColor(Color.GRAY);
-        grayPaint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.GRAY);
+        paint.setStyle(Paint.Style.FILL);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // Dibuja el contorno del edificio
-        canvas.drawRect(50, 50, width - 50, height - 50, paint);
 
-        // Rellena la planta que coincide con la altura del círculo con color gris
-        int currentFloor = (int) ((currentHeight - 50) / (height - 100) * numPisos);
-        if (currentFloor >= 0 && currentFloor < numPisos) {
-            int startY = (int) (50 + currentFloor * pisoHeight);
-            canvas.drawRect(50, startY, width - 50, startY + pisoHeight, grayPaint);
-        }
+        // Calcula el tamaño de un piso
+        int pisoHeight = getHeight() / numPisos;
 
-        // Dibuja las divisiones de los pisos
-        for (int i = 1; i < numPisos; i++) {
-            int y = 50 + i * pisoHeight;
-            canvas.drawLine(50, y, width - 50, y, paint);
+        // Dibuja los pisos del edificio
+        for (int i = 0; i < numPisos; i++) {
+            float startY = i * pisoHeight;
+            float endY = startY + pisoHeight;
+            if (currentHeight >= startY && currentHeight < endY) {
+                paint.setColor(Color.RED); // Pinta el piso actual de rojo si el círculo está en este piso
+            } else {
+                paint.setColor(Color.GRAY); // Pinta los otros pisos de gris
+            }
+            canvas.drawRect(0, startY, getWidth(), endY, paint); // Dibuja un piso
         }
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        width = w;
-        height = h;
-        pisoHeight = (height - 100) / numPisos;
-    }
-
-    public void updateCircleHeight(float height) {
-        this.currentHeight = height;
-        invalidate();
+    public void setCurrentHeight(float currentHeight) {
+        this.currentHeight = currentHeight; // Establece la altura actual del círculo
+        invalidate(); // Invalida la vista para que se vuelva a dibujar
     }
 }

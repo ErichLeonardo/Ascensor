@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FFFFFF"
-    android:backgroundTint="#00FFFFFF"
+    android:background="#FFB6C1"
     android:onClick="recolocar"
     tools:context=".MainActivity">
 
 
     <com.example.ascensor.MiEdificio
         android:id="@+id/miEdificio"
-        android:layout_width="254dp"
-        android:layout_height="623dp"
+        android:layout_width="200dp"
+        android:layout_height="600dp"
         app:layout_constraintBottom_toTopOf="@id/miCirculo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
@@ -25,13 +24,13 @@
 
     <com.example.ascensor.MiCirculo
         android:id="@+id/miCirculo"
-        android:layout_width="82dp"
-        android:layout_height="606dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="600dp"
+        app:layout_constraintBottom_toBottomOf="@id/miEdificio"
+        app:layout_constraintEnd_toEndOf="@id/miEdificio"
         app:layout_constraintHorizontal_bias="0.826"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/miEdificio"
+        app:layout_constraintTop_toTopOf="@id/miEdificio"
         app:layout_constraintVertical_bias="0.139"
         tools:ignore="MissingConstraints" />
 
